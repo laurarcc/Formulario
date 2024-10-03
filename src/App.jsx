@@ -18,16 +18,15 @@ import Grid from "@mui/material/Grid2"
 
 
 function App() {
-    const [data, setData] = useState({name: '', surName: '', age: '', gender: '', program: '', star: ''});
+    const [data, setData] = useState({
+        name: '', surName: '', age: '', gender: '', program: '',
+        star: '', check: false
+    });
     const [open, setOpen] = React.useState(false);
-    //const [condiciones, setCondiciones] = React.useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(data)
-        //if (!condiciones) {
-        //    alert('Por favor, acepte los términos y condiciones.')
-        //} Preguntar a la profe
     }
 
     const handleName = (e) => {
@@ -86,6 +85,13 @@ function App() {
         setOpen(false);
     }
 
+    const handleCheck = (e) => {
+        setData({
+            ...data,
+            check: e.target.checked
+        });
+    }
+
 
     return (
         <>
@@ -93,7 +99,7 @@ function App() {
                 <Box component="form" onSubmit={handleSubmit}>
                     <Typography variant='h4' color={'#f99db8'} sx={{mt: 2, mb: 2}}>Formulario</Typography>
                     <Grid container spacing={2}>
-                        <Grid size={5}>
+                        <Grid size={{md: 5, xs: 10, lg: 5}}>
                             <TextField
                                 required
                                 label="Nombre"
@@ -103,7 +109,7 @@ function App() {
                                 onChange={handleName}
                             />
                         </Grid>
-                        <Grid size={5}>
+                        <Grid size={{md: 5, xs: 10, lg: 5}}>
                             <TextField
                                 required
                                 label="Apellido"
@@ -113,7 +119,7 @@ function App() {
                                 onChange={handleSurName}
                             />
                         </Grid>
-                        <Grid size={2}>
+                        <Grid size={{md: 2, xs: 10, lg: 2}}>
                             <TextField
                                 required
                                 label="Edad"
@@ -125,12 +131,12 @@ function App() {
                             />
                         </Grid>
 
-                        <Grid size={5}>
+                        <Grid size={'auto'}>
                             <FormControl>
                                 <FormLabel>Género</FormLabel>
-                                <RadioGroup row name="gender"  onChange={handleGender} value={data.gender} required>
-                                    <FormControlLabel  value="female" control={<Radio/>} onChange={handleGender}
-                                                       label="Femenino" required/>
+                                <RadioGroup row name="gender" onChange={handleGender} value={data.gender} required>
+                                    <FormControlLabel value="female" control={<Radio/>} onChange={handleGender}
+                                                      label="Femenino" required/>
                                     <FormControlLabel value="male" control={<Radio/>} onChange={handleGender}
                                                       label="Masculino" required/>
                                     <FormControlLabel value="other" control={<Radio/>} onChange={handleGender}
@@ -139,7 +145,7 @@ function App() {
                             </FormControl>
                         </Grid>
 
-                        <Grid size={7}>
+                        <Grid size={{md: 5, xs: 10, lg: 7}}>
                             <FormControl fullWidth>
                                 <InputLabel>Lenguaje de programación favorito</InputLabel>
                                 <Select label='Lenguaje de Programación favorito' onChange={handleProgram}
@@ -157,12 +163,17 @@ function App() {
                         Puntua esta encuesta<Rating value={data.star} onChange={handleStar} precision={0.5}/>
                     </FormGroup>
                     <FormGroup row>
-                        <FormControlLabel control={<Checkbox Checkbox {...data} color="secondary" required/>}
-                                          label={"He leido los terminos y condiciones"} labelPlacement={"end"}/>
+                        <FormControlLabel
+                            control={<Checkbox onChange={handleCheck} checked={data.check} color="secondary"/>}
+                            label={"He leido los terminos y condiciones"} labelPlacement={"end"}
+                        />
                     </FormGroup>
 
                     <Grid size={{xs: 6, md: 6}} container spacing={2} class={'botonCentro'}>
-                        <Button type={"submit"} variant='outlined' class={'buttonEnviar'} onClick={handleClickOpen}>Enviar</Button>
+
+                        <Button type={"submit"} variant='contained' class={'buttonEnviar'}
+                                onClick={handleClickOpen} disabled={!data.check}> Enviar </Button>
+
                         <Dialog open={open} onClose={handleClickClose}>
                             <DialogTitle>Confirmación</DialogTitle>
                             <DialogContent>¿Está usted seguro/a de mandar la encuesta?</DialogContent>
