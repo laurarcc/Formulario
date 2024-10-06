@@ -134,7 +134,7 @@ function App() {
                         <Grid size={'auto'}>
                             <FormControl>
                                 <FormLabel>Género</FormLabel>
-                                <RadioGroup row name="gender" onChange={handleGender} value={data.gender} required>
+                                <RadioGroup row name="gender" onChange={handleGender} value={data.gender}>
                                     <FormControlLabel value="female" control={<Radio/>} onChange={handleGender}
                                                       label="Femenino" required/>
                                     <FormControlLabel value="male" control={<Radio/>} onChange={handleGender}
@@ -145,7 +145,7 @@ function App() {
                             </FormControl>
                         </Grid>
 
-                        <Grid size={{md: 5, xs: 10, lg: 7}}>
+                        <Grid size={{md: 7, xs: 10, lg: 8}}>
                             <FormControl fullWidth>
                                 <InputLabel>Lenguaje de programación favorito</InputLabel>
                                 <Select label='Lenguaje de Programación favorito' onChange={handleProgram}
