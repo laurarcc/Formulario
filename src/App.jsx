@@ -20,7 +20,7 @@ import Grid from "@mui/material/Grid2"
 function App() {
     const [data, setData] = useState({
         name: '', surName: '', age: '', gender: '', program: '',
-        star: '', check: false
+        star: 0, check: false
     });
     const [open, setOpen] = React.useState(false);
 
@@ -73,7 +73,7 @@ function App() {
 
     const resetForm = () => {
         setData({
-            name: '', surName: '', age: '', gender: '', program: '', star: ''
+            name: '', surName: '', age: '', gender: '', program: '', star: 0, check: false
         })
     }
 
@@ -171,18 +171,18 @@ function App() {
 
                     <Grid size={{xs: 6, md: 6}} container spacing={2} class={'botonCentro'}>
 
-                        <Button type={"submit"} variant='contained' class={'buttonEnviar'}
+                        <Button type={"submit"} variant='contained' className={'buttonEnviar'}
                                 onClick={handleClickOpen} disabled={!data.check}> Enviar </Button>
 
                         <Dialog open={open} onClose={handleClickClose}>
                             <DialogTitle>Confirmación</DialogTitle>
                             <DialogContent>¿Está usted seguro/a de mandar la encuesta?</DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClickClose} class={'buttonEnviar'}>No</Button>
-                                <Button onClick={handleClickClose} autoFocus class={'buttonEnviar'}> Si </Button>
+                                <Button onClick={handleClickClose} className={'buttonEnviar'}>No</Button>
+                                <Button onClick={handleClickClose} autoFocus className={'buttonEnviar'}> Si </Button>
                             </DialogActions>
                         </Dialog>
-                        <Button variant='outlined' onClick={resetForm} class={'buttonEnviar'}>Limpiar</Button>
+                        <Button variant='outlined' onClick={resetForm} className={'buttonEnviar'}>Limpiar</Button>
                         <Grid>
                         </Grid>
                     </Grid>
